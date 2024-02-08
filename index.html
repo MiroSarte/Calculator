@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Document</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js">
+
+    </script>
+
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js">
+
+    </script>
+    
+</head>
+
+<body>
+    
+    <div class="calculator">
+
+        <div class= "toggle-switch" id= "theme">
+            <ion-icon name="sunny-outline" class= "theme-icon" id="day"></ion-icon>
+            <ion-icon name="moon-outline" class="theme-icon" id="night"></ion-icon>
+        </div>
+
+        <p class="input" id="previous_output" ></p>
+        <input class="input" id="current_output" placeholder="0" type = "tel" onkeypress="numbersAndOperatorsOnly(event)" autofocus>
+        <p class="input" id="result" ></p>
+        
+        <div class="keys_container" >
+
+            <button class="keys_row1 special btn" id="keys_AC">
+            AC
+            </button>
+
+            <button class="keys_row1 special btn" id="keys_parenthesis">
+            ()
+            </button>
+
+            <button class="keys_row1 special btn" id="keys_percent">
+            %
+            </button>
+            <button class="keys_row1 operator btn" id="operator_÷">
+            ÷
+            </button>
+
+            <button class="keys_row2 btn numkeys" id="keys_7">
+            7
+            </button>
+
+            <button class="keys_row2 btn numkeys" id="keys_8">
+            8
+            </button>
+
+            <button class="keys_row2 btn numkeys" id="keys_9">
+            9
+            </button>
+
+            <button class="keys_row2 btn operator" id="operator_x">
+            x
+            </button>
+
+            <button class="keys_row3 btn numkeys" id="keys_4">
+            4
+            </button>
+
+            <button class="keys_row3 btn numkeys" id="keys_5">
+            5
+            </button>
+
+            <button class="keys_row3 btn numkeys" id="keys_6">
+            6
+            </button>
+
+            <button class="keys_row3 btn operator" id="operator_-">
+            -
+            </button>
+
+            <button class="keys_row4 btn numkeys" id="keys_1">
+            1
+            </button>
+
+            <button class="keys_row4 btn numkeys" id="keys_2">
+            2
+            </button>
+
+            <button class="keys_row4 btn numkeys" id="keys_3">
+            3
+            </button>
+
+            <button class="keys_row4 btn operator" id="operator_+">
+            +
+            </button>
+
+            <button class="keys_row5 btn numkeys" id="keys_0">
+            0
+            </button>
+
+            <button class="keys_row5 btn numkeys" id="keys_dot">
+            .
+            </button>
+
+            <button class="keys_row5 btn numkeys" id="keys_backspace">
+                <ion-icon name="backspace">
+                    </ion-icon>
+            </button>
+
+            <button class="keys_row5 btn operator" id="operator_=">
+            =
+            </button>
+
+        </div>
+
+
+    </div>
+
+    <script src = "app.js"></script>
+</body>
+
+</html>
