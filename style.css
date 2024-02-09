@@ -17,7 +17,8 @@
     box-sizing: border-box;
 }
 body{
-    background-image:linear-gradient(#f1f1f1, #3f3d3d)
+    background-image:linear-gradient(#f1f1f1, #3f3d3d);
+    background-repeat: no-repeat;
 }
 
 
@@ -26,9 +27,10 @@ body{
     height: 600px;
     width: 360px;
     margin:auto;
-    margin-top: 24px;
+    margin-top:24px;
+    margin-bottom:24px;
     position: relative;
-    border-radius: 8px;    
+    border-radius: 16px;
     background-color: var(--lightColor1);
     background-repeat: no-repeat;
     transition: 1000ms;
@@ -86,8 +88,7 @@ body{
     height: 364px;
     width: 360px;
     bottom: 0;
-    border-top-right-radius: 16px;
-    border-top-left-radius: 16px;
+    border-radius: 16px;
     background-color: var(--lightColor2);
     display: grid;
     grid-template-rows: 58px 58px 58px 58px 58px;

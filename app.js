@@ -129,11 +129,14 @@ btn_0.addEventListener("click", ()=>{
 btn_decimal.addEventListener("click", ()=>{
     const keys = ".";
     const arrlength = currentOutput.value.length
-     if(currentOutput.value.slice(-1) ===  "+" || currentOutput.value.slice(-1) ===  "-"|| currentOutput.value.slice(-1) ===  "x"|| currentOutput.value.slice(-1) ===  "÷" || currentOutput.value.slice(-1) ===  "."|| currentOutput.value.slice(-1) ===  "" ){
+     if(currentOutput.value.slice(-1) ===  "+" || currentOutput.value.slice(-1) ===  "-"|| currentOutput.value.slice(-1) ===  "x"|| currentOutput.value.slice(-1) ===  "÷" || currentOutput.value.slice(-1) ===  "."){
          //dont append operator
        currentOutput.value = currentOutput.value.slice(0, arrlength-1)
        displayOutput(keys)
          
+    }
+    else if(currentOutput.value.slice(-1) ===  "" ){
+
     }
      else{
       
@@ -144,11 +147,14 @@ btn_decimal.addEventListener("click", ()=>{
 btn_addition.addEventListener("click", ()=>{
     const keys = "+";
     const arrlength = currentOutput.value.length
-     if(currentOutput.value.slice(-1) ===  "+" || currentOutput.value.slice(-1) ===  "-"|| currentOutput.value.slice(-1) ===  "x"|| currentOutput.value.slice(-1) ===  "÷" || currentOutput.value.slice(-1) ===  "" || currentOutput.value.slice(-1) ===  "."){
+     if(currentOutput.value.slice(-1) ===  "+" || currentOutput.value.slice(-1) ===  "-"|| currentOutput.value.slice(-1) ===  "x"|| currentOutput.value.slice(-1) ===  "÷" || currentOutput.value.slice(-1) ===  "."){
          //dont append operator
        currentOutput.value = currentOutput.value.slice(0, arrlength-1)
        displayOutput(keys)
          
+    }
+    else if(currentOutput.value.slice(-1) ===  "" ){
+
     }
      else{
       
@@ -160,10 +166,13 @@ btn_addition.addEventListener("click", ()=>{
 btn_subtraction.addEventListener("click", ()=>{
     const keys = "-";
     const arrlength = currentOutput.value.length
-    if(currentOutput.value.slice(-1) ===  "+" || currentOutput.value.slice(-1) ===  "-"|| currentOutput.value.slice(-1) ===  "x"|| currentOutput.value.slice(-1) ===  "÷" || currentOutput.value.slice(-1) ===  "" || currentOutput.value.slice(-1) ===  "."){
+    if(currentOutput.value.slice(-1) ===  "+" || currentOutput.value.slice(-1) ===  "-"|| currentOutput.value.slice(-1) ===  "x"|| currentOutput.value.slice(-1) ===  "÷"  || currentOutput.value.slice(-1) ===  "."){
         //dont append operator
         currentOutput.value = currentOutput.value.slice(0, arrlength-1)
         displayOutput(keys)
+     }
+     else if(currentOutput.value.slice(-1) ===  "" ){
+
      }
      else{
     
@@ -174,10 +183,13 @@ btn_subtraction.addEventListener("click", ()=>{
 btn_multiplication.addEventListener("click", ()=>{
     const keys = "x";
     const arrlength = currentOutput.value.length
-    if(currentOutput.value.slice(-1) ===  "+" || currentOutput.value.slice(-1) ===  "-"|| currentOutput.value.slice(-1) ===  "x"|| currentOutput.value.slice(-1) ===  "÷" || currentOutput.value.slice(-1) ===  "" || currentOutput.value.slice(-1) ===  "."){
+    if(currentOutput.value.slice(-1) ===  "+" || currentOutput.value.slice(-1) ===  "-"|| currentOutput.value.slice(-1) ===  "x"|| currentOutput.value.slice(-1) ===  "÷" || currentOutput.value.slice(-1) ===  "."){
        //dont append operator
        currentOutput.value = currentOutput.value.slice(0, arrlength-1)
        displayOutput(keys)
+     }
+     else if(currentOutput.value.slice(-1) ===  "" ){
+
      }
      else{
         
@@ -188,10 +200,13 @@ btn_multiplication.addEventListener("click", ()=>{
 btn_division.addEventListener("click", ()=>{
     const keys = "÷";
     const arrlength = currentOutput.value.length
-    if(currentOutput.value.slice(-1) ===  "+" || currentOutput.value.slice(-1) ===  "-"|| currentOutput.value.slice(-1) ===  "x"|| currentOutput.value.slice(-1) ===  "÷" || currentOutput.value.slice(-1) ===  "" || currentOutput.value.slice(-1) ===  "."){
+    if(currentOutput.value.slice(-1) ===  "+" || currentOutput.value.slice(-1) ===  "-"|| currentOutput.value.slice(-1) ===  "x"|| currentOutput.value.slice(-1) ===  "÷" || currentOutput.value.slice(-1) ===  "."){
         //dont append operator
         currentOutput.value = currentOutput.value.slice(0, arrlength-1)
         displayOutput(keys)
+     }
+     else if(currentOutput.value.slice(-1) ===  "" ){
+
      }
      else{
         
@@ -200,11 +215,61 @@ btn_division.addEventListener("click", ()=>{
      }
 })
 btn_equal.addEventListener("click", ()=>{
-    const operators = currentOutput.value.replace(/[0-9]|\./g, "").split("");
-    const number = currentOutput.value.split(/\+|\-|\x|\÷/g);
-    console.log(number);
-    console.log(operators);
-    ResolvedMath(operators, number)
+    let arr = currentOutput.value.split((""));
+    let equation = arr.join("");
+    let OpenParenthesis = arr.indexOf("(");
+    let CloseParenthesis = arr.indexOf(")");
+    let encloseNum;
+    
+
+    //check the equation if there is Parenthesis.
+    console.log(OpenParenthesis)
+    if(OpenParenthesis == -1){
+        console.log(equation);
+        equation = ResolvedMath(equation);
+        console.log(equation);
+        previousOutput.innerHTML = currentOutput.value;
+        currentOutput.value = equation;
+        result.innerHTML = currentOutput.value;
+    }
+    else{
+        while(OpenParenthesis != -1){
+            encloseNum = arr.slice(OpenParenthesis+1, CloseParenthesis).join("");
+            encloseNum = ResolvedMath(encloseNum);
+            console.log(encloseNum)
+            for(let i = OpenParenthesis; i<=CloseParenthesis; i++){
+              arr[i] = ""
+             if(i == CloseParenthesis){
+                if(arr[OpenParenthesis-1] !== "+"||arr[OpenParenthesis-1] !== "-"||arr[OpenParenthesis-1] !== "x"||arr[OpenParenthesis-1] !== "÷"||arr[OpenParenthesis-1] !== "%" || arr[OpenParenthesis-1] !== ")" && OpenParenthesis != 0 && arr[CloseParenthesis+1] !== "+" || arr[CloseParenthesis+1] !== "-" || arr[CloseParenthesis+1] !== "x" || arr[CloseParenthesis+1] !== "÷" || arr[CloseParenthesis+1] !== "%" || arr[CloseParenthesis+1] !== "(" && CloseParenthesis+1 < arr.length){
+                    arr[i] =  "x" + encloseNum + "x" ;
+                }
+                else if (arr[CloseParenthesis+1] !== "+" || arr[CloseParenthesis+1] !== "-" || arr[CloseParenthesis+1] !== "x" || arr[CloseParenthesis+1] !== "÷" || arr[CloseParenthesis+1] !== "%" || arr[CloseParenthesis+1] !== "(" && CloseParenthesis+1 < arr.length) {
+                    console.log(arr[OpenParenthesis-1]);
+                    arr[i] =  encloseNum + "x" ;
+                }
+                else if (arr[OpenParenthesis-1] !== "+"||arr[OpenParenthesis-1] !== "-"||arr[OpenParenthesis-1] !== "x"||arr[OpenParenthesis-1] !== "÷"||arr[OpenParenthesis-1] !== "%" || arr[OpenParenthesis-1] !== ")" && OpenParenthesis != 0) {
+                    console.log(arr[OpenParenthesis-1]);
+                    arr[i] = "x" + encloseNum;
+                }
+                
+                else{
+                    arr[i] = encloseNum;
+                }
+               
+             }  
+
+              
+            }
+            OpenParenthesis = arr.indexOf("(")
+            CloseParenthesis = arr.indexOf(")")
+        }
+        equation = ResolvedMath(arr.join(""))
+        previousOutput.innerHTML = currentOutput.value;
+        currentOutput.value = equation;
+        result.innerHTML = currentOutput.value;
+    }  
+
+
 })
 
 btn_AC.addEventListener("click", ()=>{
@@ -225,8 +290,11 @@ let charBeforeCaret = currentOutput.value.substring(0, pos-1);
  currentOutput.setSelectionRange(pos, pos)
 })
 btn_Percent.addEventListener("click", ()=>{
-    if(currentOutput.value.slice(-1) ===  "%" || currentOutput.value.slice(-1) ===  "" ){
+    if(currentOutput.value.slice(-1) ===  "%" || currentOutput.value.slice(0) ===  "" ){
         //dont append operator
+     }
+     else if(currentOutput.value.slice(-1) ===  "" ){
+
      }
      else{
         const keys = "%";
@@ -258,7 +326,22 @@ button.addEventListener("click", ()=>{
 });
 })
 
-function ResolvedMath(operators, number){
+function ResolvedMath(equation){
+    const operators = equation.replace(/[0-9]|\.|\(|\)/g, "").split("");
+    const number = equation.split(/\+|\-|\x|\÷|\%/g);
+    console.log(operators, number);
+// assign the position of premier percentage from operator in the percentage varible.
+    let percentage = operators.indexOf("%");
+    //using while loop to target all percentage in the equation and resolve it. 
+    while(percentage != -1){
+        //resolve the target percentage
+        number.splice(percentage, 2, number[percentage] * number[percentage + 1] /100 );
+        //remove the operator after it  is resolved
+        operators.splice(percentage, 1);
+        // assign the position of next percentage.
+        percentage = operators.indexOf("%");
+    }
+
       // assign the position of premier division from operator in the divide varible.
       let divide = operators.indexOf("÷");
       //using while loop to target all divide in the equation and resolve it. 
@@ -307,9 +390,6 @@ function ResolvedMath(operators, number){
             // assign the position of next adden to be sum.
             subtraction = operators.indexOf("-");
         }
-        previousOutput.innerHTML = currentOutput.value;
-        currentOutput.value = number[0];
-        result.innerHTML = currentOutput.value;
-  
-  
+        console.log(number[0]);
+          return number[0];
   }
