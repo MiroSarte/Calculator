@@ -240,16 +240,17 @@ btn_equal.addEventListener("click", ()=>{
             for(let i = OpenParenthesis; i<=CloseParenthesis; i++){
               arr[i] = ""
              if(i == CloseParenthesis){
-                if(arr[OpenParenthesis-1] !== "+"||arr[OpenParenthesis-1] !== "-"||arr[OpenParenthesis-1] !== "x"||arr[OpenParenthesis-1] !== "÷"||arr[OpenParenthesis-1] !== "%" || arr[OpenParenthesis-1] !== ")" && OpenParenthesis != 0 && arr[CloseParenthesis+1] !== "+" || arr[CloseParenthesis+1] !== "-" || arr[CloseParenthesis+1] !== "x" || arr[CloseParenthesis+1] !== "÷" || arr[CloseParenthesis+1] !== "%" || arr[CloseParenthesis+1] !== "(" && CloseParenthesis+1 < arr.length){
+                if((arr[OpenParenthesis-1] !== "+"|| arr[OpenParenthesis-1] !== "-"||arr[OpenParenthesis-1] !== "x"||arr[OpenParenthesis-1] !== "÷"||arr[OpenParenthesis-1] !== "%" || arr[OpenParenthesis-1] !== ")") && (arr[CloseParenthesis+1] !== "+" || arr[CloseParenthesis+1] !== "-" || arr[CloseParenthesis+1] !== "x" || arr[CloseParenthesis+1] !== "÷" || arr[CloseParenthesis+1] !== "%" || arr[CloseParenthesis+1] !== "(") && (CloseParenthesis+1 <  arr.length && OpenParenthesis != 0)){
                     arr[i] =  "x" + encloseNum + "x" ;
+                    console.log("g")
                 }
-                else if (arr[CloseParenthesis+1] !== "+" || arr[CloseParenthesis+1] !== "-" || arr[CloseParenthesis+1] !== "x" || arr[CloseParenthesis+1] !== "÷" || arr[CloseParenthesis+1] !== "%" || arr[CloseParenthesis+1] !== "(" && CloseParenthesis+1 < arr.length) {
-                    console.log(arr[OpenParenthesis-1]);
+                else if ((arr[CloseParenthesis+1] !== "+" || arr[CloseParenthesis+1] !== "-" || arr[CloseParenthesis+1] !== "x" || arr[CloseParenthesis+1] !== "÷" || arr[CloseParenthesis+1] !== "%" || arr[CloseParenthesis+1] !== "(") && (CloseParenthesis+1 < arr.length)) {
                     arr[i] =  encloseNum + "x" ;
+                    console.log("h")
                 }
                 else if (arr[OpenParenthesis-1] !== "+"||arr[OpenParenthesis-1] !== "-"||arr[OpenParenthesis-1] !== "x"||arr[OpenParenthesis-1] !== "÷"||arr[OpenParenthesis-1] !== "%" || arr[OpenParenthesis-1] !== ")" && OpenParenthesis != 0) {
-                    console.log(arr[OpenParenthesis-1]);
                     arr[i] = "x" + encloseNum;
+                    console.log("a")
                 }
                 
                 else{
@@ -263,6 +264,7 @@ btn_equal.addEventListener("click", ()=>{
             OpenParenthesis = arr.indexOf("(")
             CloseParenthesis = arr.indexOf(")")
         }
+        console.log(arr)
         equation = ResolvedMath(arr.join(""))
         previousOutput.innerHTML = currentOutput.value;
         currentOutput.value = equation;
